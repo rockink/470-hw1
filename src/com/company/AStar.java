@@ -11,7 +11,6 @@ public class AStar {
     List<Integer> list;
     boolean notGoal[];
 
-
     public AStar(Queue<Edge>[] nodes) {
         this.nodes = nodes;
         this.pathCostMap = new HashMap<String, Integer>();
@@ -27,7 +26,26 @@ public class AStar {
     //given a stack of path, iteratate over each elem to get the cost
     //say stack is 1, 2, 3, cost would be + (1, 2) (2, 3)
     private int pathCostFrom(Stack<Integer> path){
-        return 1;
+        
+        int i = 0;
+        int prev = 0;
+        int path = 0;
+        for(Integer node : path){
+            if (i == 0){
+                   prev = node;
+                    i++;
+                continue;
+            }
+            
+            //this guarantees a path from that part!
+            path += FGHEdges.get(String.format("%s-%s", prev, node));
+
+            //so that when we do the next one, we are going to look from current node, to
+            //the next node from for loop
+            prev = node;
+            
+        }
+        
     }
     
 
