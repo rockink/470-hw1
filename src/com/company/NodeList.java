@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 
 public class NodeList {
@@ -11,29 +8,31 @@ public class NodeList {
 
     private final int n;
 
-    private PriorityQueue<Edge>[] nodes; //each node is connected to other node via edge
-
+    private Queue<Edge>[] nodes; //each node is connected to other node via edge
+    int E;
 
     public NodeList(int n) {
-        System.out.println("Nodes " + n);
         this.n = n;
         nodes= (PriorityQueue<Edge>[]) new PriorityQueue[n];
+//        nodes= (LinkedList<Edge>[]) new LinkedList[n];
 
         for (int i = 0; i < n; i++)
             nodes[i] = new PriorityQueue<>();
+//            nodes[i] = new LinkedList<>();
     }
 
 
     public void addEdge(int source, int target, int dist) {
         Edge edge = new Edge(source, target, dist);
-        System.out.println("source : " + source + " target: "+ target );
         nodes[source].add(edge);
+        E++;
     }
 
 
-    public void runGreedySearch(){
-        GreedySearch greedySearch = new GreedySearch(nodes);
 
+
+    public int E(){
+        return E;
     }
 
     public  Queue<Edge>[] getNodes(){

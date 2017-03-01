@@ -22,15 +22,12 @@ public class Main {
             nodeList.addEdge(u, v, dist);
         }
 
-//        GreedySearch greedySearch = new GreedySearch(nodeList.getNodes());
-//        greedySearch.part2(0, 5);
+        GreedySearch greedySearch = new GreedySearch(nodeList);
+        greedySearch.part2(0, 5);
+        System.out.println(greedySearch.trace);
 
-        AStar aStar = new AStar(nodeList.getNodes());
-
-        Stack<Integer> outcomes = new Stack<>();
-        aStar.astar(0, 5, outcomes);
-
-        System.out.println(outcomes);
-
+        AStar aStar = new AStar(nodeList);
+        aStar.astar(0, 5);
+        aStar.stacker();
     }
 }
