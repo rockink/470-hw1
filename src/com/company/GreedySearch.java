@@ -1,6 +1,5 @@
 package com.company;
 
-import javax.xml.soap.Node;
 import java.util.*;
 
 
@@ -51,20 +50,19 @@ public class GreedySearch {
     }
 
 
-    public boolean part2(int current, int goal){
+    public boolean algorithm(int current, int goal){
 
         visited.add(current);
 
         int childrenNum = nodes[current].size();
-
         if (childrenNum == 0 && goal != current) {
             nodeStack.pop();
             return false; //node del
         }
+
         if(current == goal) return true;
 
         Map<Integer, Edge> heuristicByEdges = new TreeMap<>();
-
         trace.add(current);
 
         for (Edge e : nodes[current]){ //for every children
@@ -77,14 +75,14 @@ public class GreedySearch {
 
         for (Map.Entry<Integer, Edge> entry : heuristicByEdges.entrySet()){
 
-            System.out.println("cost"  + entry.getKey());
-            System.out.println("for " + entry.getValue().source  + "  " + entry.getValue().target);
+//            System.out.println("cost"  + entry.getKey());
+//            System.out.println("for " + entry.getValue().source  + "  " + entry.getValue().target);
 
             int target = entry.getValue().target;
             if(!visited.contains(target)) {
                 nodeStack.add(target);
-                if (part2(entry.getValue().target, goal)) {
-                    System.out.println(current + "  " + entry.getValue().target);
+                if (algorithm(entry.getValue().target, goal)) {
+//                    System.out.println(current + "  " + entry.getValue().target);
                     return true;
                 }
             }
@@ -95,33 +93,9 @@ public class GreedySearch {
     }
 
 
-
-    public boolean dfs(int curNode, int goal){
-
-        Queue<Edge> children = nodes[curNode];
-
-        if(children.isEmpty() && curNode != goal){
-            notGoal[curNode] = true;
-            return false;
-        }else if (curNode == goal){
-            list.add(curNode);
-            System.out.println(curNode);
-            return true;
-        }
-
-        while (!children.isEmpty()){
-            Edge edge = children.poll();
-
-            //if we match
-            if (dfs(edge.target, goal)) {
-                list.add(edge.source);
-                System.out.println(edge.source);
-                return true;
-            }
-
-        }
-
-        return false;
+    public Stack<Integer> search(int source, int target) {
+        nodeStack.add(source);
+        algorithm(source, target);
+        return nodeStack;
     }
-
 }

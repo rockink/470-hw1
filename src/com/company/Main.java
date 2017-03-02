@@ -23,11 +23,21 @@ public class Main {
         }
 
         GreedySearch greedySearch = new GreedySearch(nodeList);
-        greedySearch.part2(0, 5);
-        System.out.println(greedySearch.trace);
+        formatPriner(greedySearch.search(0, n - 1));
 
         AStar aStar = new AStar(nodeList);
-        aStar.astar(0, 5);
-        aStar.stacker();
+        formatPriner(aStar.search(0, n - 1));
+
+    }
+
+    private static void formatPriner(Stack<Integer> nodes) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Integer node : nodes)
+            stringBuilder.append(node).append(">");
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+
+        System.out.println(stringBuilder.toString());
+
     }
 }

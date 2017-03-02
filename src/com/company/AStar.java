@@ -1,6 +1,5 @@
 package com.company;
 
-import javax.xml.soap.Node;
 import java.util.*;
 
 public class AStar {
@@ -11,7 +10,7 @@ public class AStar {
     private Set<Integer> visited;
     private int[][] pathMap;
     private Stack<Integer> trace;
-    int maxBrach = 2;
+    private int maxBrach = 2;
 
     public AStar(NodeList nodeList) {
         this.nodes = nodeList.getNodes();
@@ -27,8 +26,8 @@ public class AStar {
 
 
 
-    Set<Integer> cal3MaxBrachset;
-    int maxBrachProgress = 0; //goes down to 3 in the end
+    private Set<Integer> cal3MaxBrachset;
+    private int maxBrachProgress = 0; //goes down to 3 in the end
     //this heuristic function at max goes down to 3 branches
     private int heuristicFn(int node, int goal){
 
@@ -37,17 +36,6 @@ public class AStar {
         maxBrachProgress = 0;
         return cost;
 
-
-//        this heuristic function is working, but a more complicated, more senseful looks like the
-//        one above, but this below still works!
-//        if (node == goal) return 1;
-//
-//        int childrenNum = nodes[node].size();
-//        if (childrenNum == 0)
-//            return 2 *n;
-//
-//
-//        return childrenNum;
 
     }
 
@@ -127,11 +115,11 @@ public class AStar {
 
             int pathCostFrom = pathCostFrom(trace);
 
-            System.out.println(String.format("Path Cost: %d to %d is %d", current, e.target, pathCostFrom));
+//            System.out.println(String.format("Path Cost: %d to %d is %d", current, e.target, pathCostFrom));
 //            System.out.println(String.format("Heuristic Cost: of %d is %d", e.target, heuristicFn(current, goal) ));
 
             int hrFn = heuristicFn(e.target, goal);
-            System.out.println(String.format("herfun from %s is %s ", e.target, hrFn));
+//            System.out.println(String.format("herfun from %s is %s ", e.target, hrFn));
             heuristicByEdges.put(hrFn + pathCostFrom, e);
             trace.pop();
         }
@@ -142,7 +130,7 @@ public class AStar {
             if(!visited.contains(target)) {
                 nodeStack.add(target);
                 if (astar(entry.getValue().target, goal)) {
-                    System.out.println(current + "  " + entry.getValue().target);
+//                    System.out.println(current + "  " + entry.getValue().target);
                     return true;
                 }
             }
@@ -155,5 +143,12 @@ public class AStar {
 
     public void stacker() {
         System.out.println(nodeStack);
+    }
+
+    public Stack<Integer> search(int source, int target) {
+        nodeStack.add(source);
+        astar(source, target);
+        return nodeStack;
+
     }
 }
