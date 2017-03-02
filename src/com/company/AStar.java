@@ -5,7 +5,10 @@ import java.util.*;
 
 /**
   * AStar implementation.
-  * 
+  * Heuristic implementation:
+          
+          h(n) = 
+          
   *
   *
   */
@@ -62,9 +65,14 @@ public class AStar {
 
     }
 
-
-    //goes upto the maxBrach, maxBrach changes dynamically, as per the dataset.
-    private int calc3MaxBranchFn(int node, int goal) {
+//  goes upto the maxBrach, maxBrach changes dynamically, as per the dataset.
+//  cal3MaxBrachFn(n) => returns {
+//    goal? 0
+//    noOutbound? n * 2 
+//     other cases are on the bottn!   
+//  }
+// recursively calculates the cost of the path of children up until maxBrach 
+  private int calc3MaxBranchFn(int node, int goal) {
 
         if (node == goal && maxBrachProgress < maxBrach) return 0;
         int childrenSize = nodes[node].size();
@@ -88,8 +96,6 @@ public class AStar {
         //on how many brances to look after, more numbers, more branch
         //for more clarity
         else if (maxBrachProgress >= maxBrach) return cost;
-
-    
         else return cost + calc3MaxBranchFn(currentEdge.target, goal);
 
     }
@@ -168,11 +174,7 @@ public class AStar {
     }
 
 
-    public void stacker() {
-        System.out.println(nodeStack);
-    }
-
-    public Stack<Integer> search(int source, int target) {
+  public Stack<Integer> search(int source, int target) {
         nodeStack.add(source);
         astar(source, target);
         return nodeStack;
