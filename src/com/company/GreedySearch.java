@@ -36,11 +36,18 @@ public class GreedySearch {
     private int heuristicFn(int current, int goalVertex){
 
         if (current == goalVertex) return 0;
+
+        //currentChild
         int child = trace.pop();
+
+        //parent of this child
         int parent = trace.peek();
 
-        //func is the weight from the top,
+        //func is the weight from the top, gets its weight
         int path = pathMap[parent][child];
+        
+        //put that child in trace, making sure trace's change outside 
+        //the scope is constant..
         trace.add(child);
 
         //this adds the min children
@@ -50,6 +57,7 @@ public class GreedySearch {
     }
 
 
+    //performs the algorithm
     public boolean algorithm(int current, int goal){
 
         visited.add(current);
